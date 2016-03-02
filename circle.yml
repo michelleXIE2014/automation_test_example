@@ -1,0 +1,26 @@
+machine:
+  node:
+    version: 4.2.1
+  java:
+    version: oraclejdk8   
+    
+general:
+  artifacts:
+      - "target/"    
+
+dependencies:
+  pre:
+    - wget -O ff-release.tar.bz2 'https://archive.mozilla.org/pub/firefox/releases/44.0b9/linux-x86_64/en-US/firefox-44.0b9.tar.bz2' && tar xjf ff-release.tar.bz2
+    - wget https://chromedriver.storage.googleapis.com/2.21/chromedriver_linux64.zip && unzip chromedriver_linux64.zip
+    - cp src/test/resources/google-chrome-stable_current_amd64_48.deb google-chrome.deb
+    - sudo dpkg -i google-chrome.deb
+    - sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+    - rm google-chrome.deb
+        
+test:
+  override:
+      - mvn integration-test -Dparallel=classes -DthreadCount=2 -Dbrowser=chrome
+      - rvm-exec 2.2.0 gem install hiptest-publisher
+      - rvm-exec 2.2.0 hiptest-publisher --version
+      - rvm-exec 2.2.0 hiptest-publisher -c hiptest-publisher.config -p target/surefire-reports/TEST-TestSuite.xml
+      - bash scripts/slackMessage.sh

@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.lazywork.testframework</groupId>
+		<artifactId>lazywork-test-framework</artifactId>
+		<version>4.0-SNAPSHOT</version>
+		<relativePath>./src/test/resources/lib_pom.xml</relativePath>
+	</parent>
+
+	<groupId>com.lazywork</groupId>
+	<artifactId>lazywork-automation-tests</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>lazywork-automation-tests</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<overwrite.binaries>false</overwrite.binaries>
+		<projectName>Automation Test Example</projectName>
+		<browser>Chrome</browser>
+		<browserVersion>48.0</browserVersion>
+		<threadCount>1</threadCount>
+		<remote>false</remote>
+		<seleniumGridURL />
+		<platform />
+		<proxyEnabled>false</proxyEnabled>
+		<proxyHost />
+		<proxyPort />
+		<testlib-version>4.0-SNAPSHOT</testlib-version>
+
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.lazywork.testframework</groupId>
+			<artifactId>lazywork-test-framework</artifactId>
+			<version>${testlib-version}</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/test/resources/lazywork-test-framework-${testlib-version}.jar</systemPath>
+		</dependency>
+	</dependencies>
+</project>
